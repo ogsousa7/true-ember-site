@@ -19,7 +19,8 @@ true-ember-site/
 │   ├── style.css     # estilos do site
 │   └── obrigado.css  # estilos da página "obrigado"
 ├── js/
-│   └── main.js       # configuração, formulário, contatos e VLibras
+│   ├── main.js       # configuração, formulário, contatos e VLibras
+│   └── tema.js       # tema claro e escuro (carregado no <head>)
 ├── assets/
 │   ├── img/          # chama da marca e ícones
 │   ├── pulso/        # telas do projeto Pulso Academia
@@ -37,7 +38,8 @@ No começo do `js/main.js` fica o bloco `CONFIG`:
 | `linkPulso` | Link do site da Pulso no Render. O botão "Abrir o site da Pulso" só aparece quando tiver link. |
 | `email`, `instagram`, `whatsapp` | Contatos. Só aparecem no site os que forem preenchidos. |
 
-As cores e fontes ficam no começo do `css/style.css`, na seção **1. Variáveis**.
+As cores e fontes ficam no começo do `css/style.css`, na seção **1. Variáveis**: primeiro as do tema escuro,
+depois as do tema claro (`:root[data-tema="claro"]`).
 
 ## Rodar no computador
 
@@ -51,8 +53,11 @@ As mensagens do formulário chegam no painel do Netlify, em **Forms**.
 
 ## Acessibilidade
 
-Contraste mínimo WCAG AA, link "Pular para o conteúdo", navegação por teclado, textos alternativos,
+Contraste mínimo WCAG AA nos dois temas, link "Pular para o conteúdo", navegação por teclado, textos alternativos,
 respeito a "reduzir movimento" e tradução para Libras com o VLibras.
+
+**Tema claro e escuro:** o botão de sol/lua no topo troca o tema. Na primeira visita o site segue o tema do
+celular ou computador; depois que a pessoa escolhe, a escolha fica salva no navegador.
 
 ---
 True Ember · Projeto acadêmico da Etec Heliópolis · 2026

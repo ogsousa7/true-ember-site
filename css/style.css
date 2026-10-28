@@ -1,9 +1,9 @@
 /* =========================================================
    True Ember — folha de estilos do site
    Organização:
-     1. Variáveis (cores, fontes, medidas)
+     1. Variáveis (cores, fontes, medidas) e tema claro
      2. Base (reset, tipografia, links, foco)
-     3. Estrutura (faixas, miolo, topo)
+     3. Estrutura (faixas, miolo, topo, botão de tema)
      4. Componentes (botões, janela, celular)
      5. Seções (abertura, projeto, serviços, processo, sobre, contato, rodapé)
      6. Acessibilidade (movimento reduzido)
@@ -23,12 +23,42 @@
   --azul-claro: #5FB4FF;   /* texto/links azuis sobre o escuro */
   --ciano: #3CC8FF;
   --brasa: #FF8A3D;        /* versão secundária (laranja) da marca, usada só em um detalhe */
+  --ok: #7EE0A7;
+  --topo-fundo: rgba(5, 7, 13, 0.72);
+  --topo-fundo-forte: rgba(5, 7, 13, 0.82);
+  --botao-2: rgba(255, 255, 255, 0.08);
+  --borda-campo: transparent;
+  --midia-celulares: linear-gradient(160deg, #13203A, #0A1020);
+  --sombra-janela: 0 40px 120px rgba(20, 70, 200, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --sombra-celular: 0 30px 80px rgba(0, 0, 0, 0.6);
 
   --fonte-marca: 'Orbitron', 'Eurostile', 'Segoe UI', sans-serif;
   --fonte: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
 
   --largura: 1120px;
   --raio: 24px;
+}
+
+/* Tema claro: o js/tema.js coloca data-tema="claro" no <html> (escolha salva ou tema do sistema).
+   Contraste AA: texto-2 7,5:1 e azul dos links 6,4:1 sobre o branco. */
+:root[data-tema="claro"] {
+  color-scheme: light;
+  --fundo: #FFFFFF;
+  --superficie: #F3F5F9;
+  --superficie-2: #FFFFFF;
+  --linha: rgba(10, 30, 80, 0.12);
+  --texto: #0B1220;
+  --texto-2: #4B5563;
+  --azul-claro: #1A56C4;
+  --brasa: #C2510F;
+  --ok: #157347;
+  --topo-fundo: rgba(255, 255, 255, 0.72);
+  --topo-fundo-forte: rgba(255, 255, 255, 0.82);
+  --botao-2: rgba(10, 30, 80, 0.06);
+  --borda-campo: #C5CDDA;
+  --midia-celulares: linear-gradient(160deg, #DCE6F7, #C9D6EE);
+  --sombra-janela: 0 30px 80px rgba(20, 50, 120, 0.18), 0 0 0 1px rgba(10, 30, 80, 0.08);
+  --sombra-celular: 0 24px 60px rgba(10, 20, 50, 0.3);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; background: var(--fundo); }
@@ -49,8 +79,8 @@ p { margin: 0; }
 .pular:focus { transform: none; }
 
 /* ---------- Topo (barra translúcida) ---------- */
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: rgba(5, 7, 13, 0.82); }
-.topo { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(5, 7, 13, 0.72); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--linha); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--topo-fundo-forte); }
+.topo { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--topo-fundo); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--linha); }
 .topo .miolo { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .marca { display: flex; align-items: center; gap: 10px; color: var(--texto); }
 .marca:hover { text-decoration: none; }
@@ -60,10 +90,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .topo nav { display: flex; align-items: center; gap: 28px; font-size: 14px; }
 .topo nav a { color: var(--texto-2); }
 .topo nav a:hover { color: var(--texto); text-decoration: none; }
+.tema-botao { width: 36px; height: 36px; flex: none; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: var(--botao-2); color: var(--texto); cursor: pointer; }
+.tema-botao:hover { filter: brightness(1.15); }
+.tema-botao .icone-lua, :root[data-tema="claro"] .tema-botao .icone-sol { display: none; }
+:root[data-tema="claro"] .tema-botao .icone-lua { display: block; }
 .botao { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: 16px; border: 0; cursor: pointer; font-family: inherit; transition: filter .15s, background-color .15s; }
 .botao:hover { text-decoration: none; filter: brightness(1.1); }
 .botao.primario { background: var(--azul); color: #fff; }
-.botao.secundario { background: rgba(255, 255, 255, 0.08); color: var(--texto); }
+.botao.secundario { background: var(--botao-2); color: var(--texto); }
 .botao.pequeno { padding: 8px 16px; font-size: 14px; }
 @media (max-width: 760px) { .topo nav .esconde-celular { display: none; } .topo nav { gap: 16px; } }
 
@@ -81,12 +115,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* ---------- Vitrine (janela + celular) ---------- */
 .vitrine { position: relative; max-width: 980px; margin: 64px auto 0; padding-bottom: 40px; }
-.janela { border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 40px 120px rgba(20, 70, 200, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.08); }
+.janela { border-radius: 18px; overflow: hidden; background: #fff; box-shadow: var(--sombra-janela); }
 .janela .barra { height: 38px; display: flex; align-items: center; gap: 8px; padding: 0 16px; background: #E9EAEE; }
 .janela .barra i { width: 11px; height: 11px; border-radius: 50%; background: #CFD1D7; }
 .janela .barra span { margin-left: 16px; flex: 1; max-width: 380px; height: 24px; border-radius: 7px; background: #fff; color: #6B7080; font-size: 12px; display: flex; align-items: center; justify-content: center; }
 .janela img { width: 100%; height: auto; }
-.celular { width: 240px; border-radius: 40px; padding: 9px; background: #0E0F12; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), inset 0 0 0 1.5px #2b2c31; position: relative; }
+.celular { width: 240px; border-radius: 40px; padding: 9px; background: #0E0F12; box-shadow: var(--sombra-celular), inset 0 0 0 1.5px #2b2c31; position: relative; }
 .celular img { border-radius: 32px; width: 100%; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
 .celular::after { content: ""; position: absolute; top: 18px; left: 50%; width: 70px; height: 20px; margin-left: -35px; border-radius: 12px; background: #000; }
 .vitrine .celular { position: absolute; right: -36px; bottom: 0; }
@@ -114,7 +148,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .entrega { background: var(--superficie); border-radius: var(--raio); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
 .entrega .midia { aspect-ratio: 4 / 3; overflow: hidden; background: #E9EAEE; display: flex; align-items: flex-start; justify-content: center; }
 .entrega .midia img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
-.entrega .midia.celulares { background: linear-gradient(160deg, #13203A, #0A1020); align-items: flex-end; gap: 14px; padding: 26px 20px 0; }
+.entrega .midia.celulares { background: var(--midia-celulares); align-items: flex-end; gap: 14px; padding: 26px 20px 0; }
 .entrega .midia.celulares img { width: 42%; height: auto; border-radius: 22px 22px 0 0; object-fit: cover; box-shadow: 0 0 0 5px #0E0F12; }
 .entrega .texto { padding: 22px 24px 26px; }
 .entrega h3 { font-size: 21px; letter-spacing: -0.02em; }
@@ -169,12 +203,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .contato { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 56px; align-items: start; }
 .formulario { background: var(--superficie); border-radius: var(--raio); padding: 30px; display: grid; gap: 16px; }
 .formulario label { display: grid; gap: 6px; font-size: 14px; color: var(--texto-2); }
-.formulario input, .formulario select, .formulario textarea { font: inherit; font-size: 17px; color: var(--texto); background: var(--superficie-2); border: 1px solid transparent; border-radius: 12px; padding: 13px 14px; width: 100%; }
+.formulario input, .formulario select, .formulario textarea { font: inherit; font-size: 17px; color: var(--texto); background: var(--superficie-2); border: 1px solid var(--borda-campo); border-radius: 12px; padding: 13px 14px; width: 100%; }
 .formulario textarea { min-height: 120px; resize: vertical; }
 .formulario input:focus, .formulario select:focus, .formulario textarea:focus { outline: none; border-color: var(--azul-claro); box-shadow: 0 0 0 4px rgba(95, 180, 255, 0.2); }
 .formulario .linha2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
 .formulario .aviso { font-size: 14px; color: var(--texto-2); min-height: 20px; }
-.formulario .aviso.ok { color: #7EE0A7; }
+.formulario .aviso.ok { color: var(--ok); }
 .escondido { position: absolute; left: -9999px; }
 .canais { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 14px; }
 .canais li { display: flex; align-items: center; gap: 12px; color: var(--texto-2); }
