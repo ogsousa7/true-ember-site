@@ -9,7 +9,7 @@
 
 /* ---------- 1. Configuração: troque aqui (o resto do site se ajusta sozinho) ---------- */
 const CONFIG = {
-  linkPulso: '',   // ex.: 'https://pulso-academia.onrender.com'
+  linkPulso: 'https://pulso-academia.onrender.com',
   email: '',       // ex.: 'contato@trueember.com.br'
   instagram: '',   // ex.: 'trueember' (sem @)
   whatsapp: '',    // ex.: '5511999999999' (só números, com DDI e DDD)
