@@ -5,7 +5,7 @@ Mostra os serviços, o jeito de trabalhar e o projeto mais recente: a **Pulso Ac
 
 Feito com HTML, CSS e JavaScript puros (sem framework e sem build).
 
-**Site no ar:** https://true-ember-site.netlify.app
+**Site no ar:** https://true-ember.netlify.app
 
 **Projeto Pulso Academia no ar:** https://pulso-academia.onrender.com
 
