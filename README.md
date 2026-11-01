@@ -15,12 +15,13 @@ Feito com HTML, CSS e JavaScript puros (sem framework e sem build).
 true-ember-site/
 ├── index.html        # página principal (só HTML)
 ├── obrigado.html     # página exibida depois do envio do formulário
+├── 404.html          # página de endereço não encontrado
 ├── css/
 │   ├── style.css     # estilos do site
 │   └── obrigado.css  # estilos da página "obrigado"
 ├── js/
 │   ├── main.js       # configuração, formulário, contatos e VLibras
-│   └── tema.js       # tema claro e escuro (carregado no <head>)
+│   └── tema.js       # tema, tamanho do texto e contraste (carregado no <head>)
 ├── assets/
 │   ├── img/          # chama da marca e ícones
 │   ├── pulso/        # telas do projeto Pulso Academia
@@ -58,6 +59,9 @@ respeito a "reduzir movimento" e tradução para Libras com o VLibras.
 
 **Tema claro e escuro:** o botão de sol/lua no topo troca o tema. Na primeira visita o site segue o tema do
 celular ou computador; depois que a pessoa escolhe, a escolha fica salva no navegador.
+
+**Painel de acessibilidade:** o botão ao lado do tema abre as opções de tamanho do texto e contraste reforçado.
+As animações respeitam "reduzir movimento".
 
 ---
 True Ember · Projeto acadêmico da Etec Heliópolis · 2026

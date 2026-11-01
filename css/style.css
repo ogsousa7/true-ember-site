@@ -81,25 +81,34 @@ p { margin: 0; }
 /* ---------- Topo (barra translúcida) ---------- */
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--topo-fundo-forte); }
 .topo { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--topo-fundo); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--linha); }
+.topo { transition: box-shadow .25s ease; }
+.topo.rolou { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18); }
 .topo .miolo { height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .marca { display: flex; align-items: center; gap: 10px; color: var(--texto); }
 .marca:hover { text-decoration: none; }
 .marca img { height: 30px; width: auto; }
-.marca span { font-family: var(--fonte-marca); font-weight: 700; font-size: 15px; letter-spacing: 0.08em; }
+.marca span { white-space: nowrap; font-family: var(--fonte-marca); font-weight: 700; font-size: 15px; letter-spacing: 0.08em; }
 .marca b { color: var(--azul-claro); font-weight: 700; }
 .topo nav { display: flex; align-items: center; gap: 28px; font-size: 14px; }
 .topo nav a { color: var(--texto-2); }
 .topo nav a:hover { color: var(--texto); text-decoration: none; }
+.topo nav a.ativo:not(.botao) { color: var(--texto); box-shadow: 0 2px 0 var(--azul-claro); padding-bottom: 4px; }
 .tema-botao { width: 36px; height: 36px; flex: none; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: var(--botao-2); color: var(--texto); cursor: pointer; }
 .tema-botao:hover { filter: brightness(1.15); }
 .tema-botao .icone-lua, :root[data-tema="claro"] .tema-botao .icone-sol { display: none; }
 :root[data-tema="claro"] .tema-botao .icone-lua { display: block; }
 .botao { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: 16px; border: 0; cursor: pointer; font-family: inherit; transition: filter .15s, background-color .15s; }
 .botao:hover { text-decoration: none; filter: brightness(1.1); }
+.botao:active { transform: scale(0.98); }
 .botao.primario { background: var(--azul); color: #fff; }
 .botao.secundario { background: var(--botao-2); color: var(--texto); }
 .botao.pequeno { padding: 8px 16px; font-size: 14px; }
-@media (max-width: 760px) { .topo nav .esconde-celular { display: none; } .topo nav { gap: 16px; } }
+.so-curto { display: none; }
+@media (max-width: 760px) { .topo nav .esconde-celular { display: none; } .topo nav { gap: 8px; } .topo .miolo { gap: 8px; } }
+@media (max-width: 430px) { .so-largo { display: none; } .so-curto { display: inline; } .topo nav .botao.pequeno { padding-inline: 12px; } }
+@media (max-width: 350px) { .topo nav .botao.pequeno { display: none; } }
+/* Com texto maior o topo não cabe inteiro no celular: o botão de contato sai (a abertura já tem o mesmo convite). */
+@media (max-width: 430px) { :root[data-texto="maior"] .topo nav .botao.pequeno, :root[data-texto="enorme"] .topo nav .botao.pequeno { display: none; } }
 
 /* ---------- Abertura ---------- */
 .abertura { text-align: center; padding-block: 72px 40px; position: relative; overflow: hidden; }
@@ -194,7 +203,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .valores b { font-family: var(--fonte-marca); font-weight: 600; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; padding-top: 3px; }
 .valores span { color: var(--texto-2); font-size: 16px; }
 .pessoa { margin-top: 36px; display: flex; align-items: center; gap: 16px; }
-.pessoa .avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(140deg, var(--ciano), var(--azul)); display: grid; place-items: center; font-weight: 700; font-size: 18px; color: #fff; }
+.pessoa .avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(140deg, var(--azul), #123F9E); display: grid; place-items: center; font-weight: 700; font-size: 18px; color: #fff; }
 .pessoa p { font-weight: 600; }
 .pessoa small { display: block; color: var(--texto-2); font-size: 14px; font-weight: 400; }
 @media (max-width: 900px) { .sobre { grid-template-columns: minmax(0, 1fr); gap: 40px; } .valores li { grid-template-columns: 1fr; gap: 4px; } }
@@ -220,7 +229,64 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .rodape .miolo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: center; }
 .rodape .brasa { color: var(--brasa); }
 
+/* ---------- Animações ---------- */
+.abertura .lema, .abertura h1, .abertura .sub, .abertura .acoes, .abertura .vitrine { animation: sobe-suave .8s cubic-bezier(.2, .8, .2, 1) both; }
+.abertura h1 { animation-delay: .08s; }
+.abertura .sub { animation-delay: .16s; }
+.abertura .acoes { animation-delay: .24s; }
+.abertura .vitrine { animation-delay: .36s; }
+@keyframes sobe-suave { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.abertura .chama { animation: chama-entra 1.2s cubic-bezier(.2,.8,.2,1) both, flutuar 6s ease-in-out 1.2s infinite; }
+@keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* O main.js coloca .revela nos blocos e .revelado quando eles aparecem na tela (sem JS, tudo fica visível). */
+.revela { opacity: 0; transform: translateY(20px); }
+.revela.revelado { opacity: 1; transform: none; transition: opacity .6s ease var(--atraso, 0s), transform .6s cubic-bezier(.2, .8, .2, 1) var(--atraso, 0s); }
+
+@media (hover: hover) {
+  .entrega { transition: transform .25s ease; }
+  .entrega:hover { transform: translateY(-4px); }
+  .entrega .midia img { transition: transform .5s ease; }
+  .entrega:hover .midia:not(.celulares) img { transform: scale(1.03); }
+  .servico { transition: background-color .2s ease; }
+  .servico:hover { background: var(--superficie); }
+  .valores li { transition: padding-left .2s ease; }
+  .valores li:hover { padding-left: 6px; }
+}
+
+/* ---------- Painel de acessibilidade ---------- */
+.painel-a11y { width: min(420px, calc(100vw / var(--escala) - 32px)); max-height: calc(100vh / var(--escala) - 32px); padding: 24px; border: 1px solid var(--linha); border-radius: var(--raio); background: var(--superficie); color: var(--texto); }
+.painel-a11y::backdrop { background: rgba(0, 0, 0, .45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.painel-a11y[open] { animation: sobe-suave .25s ease both; }
+.painel-topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.painel-a11y h2 { font-size: 24px; letter-spacing: -0.02em; }
+.painel-rotulo { margin-top: 20px; font-size: 15px; font-weight: 600; }
+.painel-dica { font-size: 13px; color: var(--texto-2); }
+.seg-texto { display: flex; gap: 2px; margin-top: 8px; padding: 3px; border-radius: 12px; background: var(--botao-2); }
+.seg-texto button { flex: 1; padding: 8px 0; border: 0; border-radius: 9px; background: transparent; color: var(--texto); font-family: inherit; font-weight: 700; line-height: 1; cursor: pointer; }
+.seg-texto button[aria-pressed="true"] { background: var(--azul); color: #fff; }
+.painel-linha { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.interruptor { flex: none; width: 51px; height: 31px; margin-top: 20px; padding: 2px; border: 0; border-radius: 999px; background: var(--botao-2); cursor: pointer; display: inline-flex; align-items: center; transition: background-color .2s ease; }
+.interruptor span { width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, .3); transition: transform .2s ease; }
+.interruptor[aria-checked="true"] { background: var(--azul); }
+.interruptor[aria-checked="true"] span { transform: translateX(20px); }
+.painel-notas { list-style: none; margin: 20px 0 0; padding: 16px 0 0; border-top: 1px solid var(--linha); display: grid; gap: 8px; font-size: 13px; color: var(--texto-2); }
+.painel-notas b { color: var(--texto); }
+
+/* ---------- Tamanho do texto e contraste ----------
+   O site usa medidas em px, então o "zoom" aumenta textos e espaços juntos e o layout continua proporcional. */
+:root { --escala: 1; }
+:root[data-texto="menor"] { --escala: .92; }
+:root[data-texto="maior"] { --escala: 1.12; }
+:root[data-texto="enorme"] { --escala: 1.25; }
+body { zoom: var(--escala); }
+:root[data-contraste="alto"] { --texto-2: var(--texto); --linha: rgba(150, 180, 255, .5); }
+:root[data-contraste="alto"][data-tema="claro"] { --linha: rgba(10, 30, 80, .5); }
+:root[data-contraste="alto"] a:not(.botao):not(.marca), :root[data-contraste="alto"] .topo nav a:not(.botao) { text-decoration: underline; text-underline-offset: 3px; }
+:root[data-contraste="alto"] .formulario input, :root[data-contraste="alto"] .formulario select, :root[data-contraste="alto"] .formulario textarea { border-color: var(--texto); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .revela { opacity: 1; transform: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

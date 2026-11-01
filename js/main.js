@@ -5,6 +5,7 @@
    3. Canais de contato
    4. Formulário (Netlify Forms)
    5. VLibras (Libras)
+   6. Animações ao rolar a página e seção ativa no menu
    ========================================================= */
 
 /* ---------- 1. Configuração: troque aqui (o resto do site se ajusta sozinho) ---------- */
@@ -53,4 +54,37 @@ const CONFIG = {
   s.async = true;
   s.onload = () => { try { new window.VLibras.Widget('https://vlibras.gov.br/app'); } catch (e) {} };
   document.body.appendChild(s);
+})();
+
+/* ---------- 6. Animações: blocos aparecem ao rolar; o topo mostra a seção atual ---------- */
+(function () {
+  const topo = document.querySelector('.topo');
+  const marcarRolagem = () => topo.classList.toggle('rolou', window.scrollY > 10);
+  window.addEventListener('scroll', marcarRolagem, { passive: true });
+  marcarRolagem();
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+
+  const aparecer = new IntersectionObserver((entradas) => {
+    entradas.filter((e) => e.isIntersecting).forEach((e) => {
+      e.target.classList.add('revelado');
+      aparecer.unobserve(e.target);
+    });
+  }, { threshold: 0.12 });
+  // Itens lado a lado entram um depois do outro.
+  document.querySelectorAll('.secao h2, .lead, .ficha, .entrega, .destaques li, .pitch, .servico, .etapas li, .valores li, .pessoa, .formulario')
+    .forEach((el) => {
+      const posicao = [...el.parentElement.children].indexOf(el);
+      el.style.setProperty('--atraso', `${Math.min(posicao, 5) * 60}ms`);
+      el.classList.add('revela');
+      aparecer.observe(el);
+    });
+
+  const links = [...document.querySelectorAll('.topo nav a[href^="#"]')];
+  const secaoAtual = new IntersectionObserver((entradas) => {
+    entradas.filter((e) => e.isIntersecting).forEach((e) => {
+      links.forEach((a) => a.classList.toggle('ativo', a.getAttribute('href') === `#${e.target.id}`));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach((s) => secaoAtual.observe(s));
 })();
