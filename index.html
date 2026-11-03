@@ -109,6 +109,56 @@
           <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.2 4L19 7"/></svg><span><strong>Montador de treinos</strong>O visitante responde cinco perguntas e recebe um plano para a semana.</span></li>
         </ul>
 
+        <figure class="dfd" id="dfd">
+          <figcaption>
+            <h3>Como a informação circula</h3>
+            <p>DFD de nível 0 (diagrama de contexto): o sistema inteiro é um único processo, e as setas mostram os dados que ele troca com quem está de fora.</p>
+          </figcaption>
+          <p class="dfd-dica" aria-hidden="true">Arraste o diagrama para o lado para ver tudo →</p>
+          <div class="dfd-rolagem" tabindex="0" aria-label="Diagrama: role para o lado no celular">
+        <svg class="dfd-svg" viewBox="0 0 900 600" role="img" aria-labelledby="dfd-titulo dfd-desc">
+          <title id="dfd-titulo">DFD de nível 0 do sistema Pulso Academia</title>
+          <desc id="dfd-desc">Diagrama de contexto: o sistema Pulso Academia no centro, trocando dados com cinco entidades externas: visitante, aluno, Google, professor e recepção. A lista abaixo do diagrama descreve cada fluxo.</desc>
+          <defs><marker id="dfd-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>
+          <rect class="dfd-processo" x="360" y="40" width="180" height="520" rx="22"/>
+          <line class="dfd-divisao" x1="360" y1="100" x2="540" y2="100"/>
+          <text class="dfd-numero" x="450" y="80" text-anchor="middle">0</text>
+          <text class="dfd-sistema" x="450" y="282" text-anchor="middle">Sistema</text>
+          <text class="dfd-sistema" x="450" y="312" text-anchor="middle">Pulso</text>
+          <text class="dfd-sistema" x="450" y="342" text-anchor="middle">Academia</text>
+          <rect class="dfd-entidade" x="20" y="78" width="150" height="64" rx="4"/><text class="dfd-nome" x="95" y="116" text-anchor="middle">Visitante</text>
+          <line class="dfd-fluxo" x1="172" y1="100" x2="352" y2="100" marker-end="url(#dfd-seta)"/><line class="dfd-fluxo" x1="358" y1="120" x2="178" y2="120" marker-end="url(#dfd-seta)"/>
+          <text class="dfd-rotulo" x="265" y="92" text-anchor="middle">cadastro e respostas</text><text class="dfd-rotulo" x="265" y="140" text-anchor="middle">planos, loja e treino</text>
+          <rect class="dfd-entidade" x="20" y="268" width="150" height="64" rx="4"/><text class="dfd-nome" x="95" y="306" text-anchor="middle">Aluno</text>
+          <line class="dfd-fluxo" x1="172" y1="290" x2="352" y2="290" marker-end="url(#dfd-seta)"/><line class="dfd-fluxo" x1="358" y1="310" x2="178" y2="310" marker-end="url(#dfd-seta)"/>
+          <text class="dfd-rotulo" x="265" y="282" text-anchor="middle">pedidos e agendamentos</text><text class="dfd-rotulo" x="265" y="330" text-anchor="middle">comprovantes e aulas</text>
+          <rect class="dfd-entidade" x="20" y="458" width="150" height="64" rx="4"/><text class="dfd-nome" x="95" y="496" text-anchor="middle">Google</text>
+          <line class="dfd-fluxo" x1="172" y1="480" x2="352" y2="480" marker-end="url(#dfd-seta)"/><line class="dfd-fluxo" x1="358" y1="500" x2="178" y2="500" marker-end="url(#dfd-seta)"/>
+          <text class="dfd-rotulo" x="265" y="472" text-anchor="middle">identidade confirmada</text><text class="dfd-rotulo" x="265" y="520" text-anchor="middle">pedido de login</text>
+          <rect class="dfd-entidade" x="730" y="158" width="150" height="64" rx="4"/><text class="dfd-nome" x="805" y="196" text-anchor="middle">Professor</text>
+          <line class="dfd-fluxo" x1="728" y1="180" x2="548" y2="180" marker-end="url(#dfd-seta)"/><line class="dfd-fluxo" x1="542" y1="200" x2="722" y2="200" marker-end="url(#dfd-seta)"/>
+          <text class="dfd-rotulo" x="635" y="172" text-anchor="middle">horários disponíveis</text><text class="dfd-rotulo" x="635" y="220" text-anchor="middle">agenda do dia</text>
+          <rect class="dfd-entidade" x="730" y="378" width="150" height="64" rx="4"/><text class="dfd-nome" x="805" y="416" text-anchor="middle">Recepção</text>
+          <line class="dfd-fluxo" x1="728" y1="400" x2="548" y2="400" marker-end="url(#dfd-seta)"/><line class="dfd-fluxo" x1="542" y1="420" x2="722" y2="420" marker-end="url(#dfd-seta)"/>
+          <text class="dfd-rotulo" x="635" y="392" text-anchor="middle">cadastros e avisos</text><text class="dfd-rotulo" x="635" y="440" text-anchor="middle">indicadores e pedidos</text>
+        </svg>
+          </div>
+          <p class="dfd-legenda"><span class="dfd-l-entidade"></span>Entidade externa <span class="dfd-l-processo"></span>Processo <span class="dfd-l-fluxo"></span>Fluxo de dados</p>
+          <details class="dfd-texto">
+            <summary>Ver os fluxos em texto</summary>
+            <table>
+              <thead><tr><th scope="col">Entidade</th><th scope="col">Envia ao sistema</th><th scope="col">Recebe do sistema</th></tr></thead>
+              <tbody>
+              <tr><th scope="row">Visitante</th><td>cadastro e respostas</td><td>planos, loja e treino</td></tr>
+              <tr><th scope="row">Aluno</th><td>pedidos e agendamentos</td><td>comprovantes e aulas</td></tr>
+              <tr><th scope="row">Google</th><td>identidade confirmada</td><td>pedido de login</td></tr>
+              <tr><th scope="row">Professor</th><td>horários disponíveis</td><td>agenda do dia</td></tr>
+              <tr><th scope="row">Recepção</th><td>cadastros e avisos</td><td>indicadores e pedidos</td></tr>
+              </tbody>
+            </table>
+          </details>
+        </figure>
+
         <div class="pitch" id="pitch">
           <video controls preload="none" playsinline poster="assets/video/pitch-poster.webp" aria-describedby="pitch-desc">
             <source src="assets/video/pitch-pulso.mp4" type="video/mp4">

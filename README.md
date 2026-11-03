@@ -60,6 +60,9 @@ respeito a "reduzir movimento" e tradução para Libras com o VLibras.
 **Tema claro e escuro:** o botão de sol/lua no topo troca o tema. Na primeira visita o site segue o tema do
 celular ou computador; depois que a pessoa escolhe, a escolha fica salva no navegador.
 
+**DFD:** a seção do projeto Pulso tem o DFD de nível 0 (diagrama de contexto), desenhado em SVG no próprio
+`index.html`, com os fluxos também em texto (tabela) para leitores de tela e para o celular.
+
 **Painel de acessibilidade:** o botão ao lado do tema abre as opções de tamanho do texto e contraste reforçado.
 As animações respeitam "reduzir movimento".
 
