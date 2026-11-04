@@ -20,7 +20,7 @@
   function aplicarTema(tema) {
     raiz.dataset.tema = tema;
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = tema === 'claro' ? '#FFFFFF' : '#05070D';
+    if (meta) meta.content = tema === 'claro' ? '#F5F8FD' : '#0A1222';
     const botao = document.getElementById('botaoTema');
     if (botao) {
       const rotulo = tema === 'claro' ? 'Mudar para o tema escuro' : 'Mudar para o tema claro';

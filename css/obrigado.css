@@ -1,7 +1,10 @@
 /* True Ember — página "Mensagem enviada" (depois do formulário). Segue o tema escolhido no site (js/tema.js). */
-:root { color-scheme: dark; --fundo: #05070D; --texto: #F2F5FA; --texto-2: #A3AFC2; --foco: #5FB4FF; }
-:root[data-tema="claro"] { color-scheme: light; --fundo: #FFFFFF; --texto: #0B1220; --texto-2: #4B5563; --foco: #1A56C4; }
-body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--fundo); color: var(--texto); font-family: -apple-system, BlinkMacSystemFont, Inter, 'Segoe UI', sans-serif; text-align: center; }
+:root { color-scheme: dark; --fundo: #0A1222; --texto: #F2F5FA; --texto-2: #A9B6CC; --foco: #6CB6FF;
+  --brilho: radial-gradient(120% 75% at 50% -12%, #1E4AA8 0%, #142C63 34%, rgba(20, 44, 99, 0) 72%); }
+:root[data-tema="claro"] { color-scheme: light; --fundo: #F5F8FD; --texto: #0B1220; --texto-2: #475467; --foco: #1A56C4;
+  --brilho: radial-gradient(120% 75% at 50% -12%, #C9DCFF 0%, #E2EBFC 38%, rgba(226, 235, 252, 0) 72%); }
+html { background: var(--fundo); }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: var(--brilho), var(--fundo); color: var(--texto); font-family: -apple-system, BlinkMacSystemFont, Inter, 'Segoe UI', sans-serif; text-align: center; }
 img { width: 90px; margin: 0 auto 28px; display: block; }
 h1 { font-size: clamp(34px, 6vw, 56px); letter-spacing: -0.04em; margin: 0; }
 p { color: var(--texto-2); font-size: 19px; margin: 14px 0 30px; }
