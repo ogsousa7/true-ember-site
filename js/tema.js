@@ -1,13 +1,12 @@
 /* =========================================================
    True Ember — preferências de acessibilidade
    Carregado no <head> (sem defer) para aplicar tudo antes de a página aparecer, sem "piscar".
-   1. Tema claro/escuro: o que a pessoa salvou ou, se nada foi salvo, o tema do sistema
+   1. Tema claro/escuro: o escuro é o padrão; o claro fica salvo se a pessoa escolher no botão do topo
    2. Tamanho do texto e contraste reforçado
    3. Botões do topo e painel de acessibilidade (só aparecem com JavaScript ligado)
    ========================================================= */
 (function () {
   const raiz = document.documentElement;
-  const sistemaClaro = window.matchMedia('(prefers-color-scheme: light)');
 
   function ler(chave) {
     try { return localStorage.getItem(chave); } catch (e) { return null; }
@@ -28,12 +27,8 @@
       botao.title = rotulo;
     }
   }
-  aplicarTema(ler('tema') || (sistemaClaro.matches ? 'claro' : 'escuro'));
-
-  // Sistema mudou e a pessoa ainda não escolheu: acompanha.
-  sistemaClaro.addEventListener('change', (e) => {
-    if (!ler('tema')) aplicarTema(e.matches ? 'claro' : 'escuro');
-  });
+  // O escuro é a cara da marca: é o padrão, mesmo com o sistema no claro.
+  aplicarTema(ler('tema') || 'escuro');
 
   /* ---------- 2. Texto e contraste ---------- */
   function aplicarTexto(tamanho) {

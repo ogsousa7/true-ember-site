@@ -50,12 +50,12 @@
     <!-- ABERTURA -->
     <section class="abertura faixa" id="inicio">
       <div class="miolo">
-        <div class="chama-wrap"><img class="chama" src="assets/img/chama.webp?v=2" alt="Chama azul da True Ember" width="384" height="546"></div>
+        <div class="chama-wrap"><img class="chama" src="assets/img/chama.webp?v=2" alt="Chama azul da True Ember" width="384" height="546"><span class="faiscas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
         <p class="lema">Soluções tecnológicas personalizadas</p>
-        <h1>Tecnologia que acende soluções.</h1>
+        <h1>Tecnologia que <span class="degrade">acende soluções.</span></h1>
         <p class="sub">Criamos sites, sistemas e aplicativos sob medida para negócios que querem crescer.</p>
         <div class="acoes">
-          <a class="botao primario" href="#projetos">Ver nosso trabalho</a>
+          <a class="botao primario" href="#projetos">Ver nosso trabalho <span class="seta" aria-hidden="true">→</span></a>
           <a class="botao secundario" href="#contato">Contar minha ideia</a>
         </div>
 
@@ -65,6 +65,13 @@
             <img src="assets/pulso/home-topo.webp?v=3" alt="" width="1600" height="1000">
           </div>
           <div class="celular"><img src="assets/pulso/aluno-agendar.webp?v=3" alt="" width="780" height="1688"></div>
+        </div>
+
+        <div class="pilha">
+          <p id="titulo-pilha">Tecnologias que usamos</p>
+          <ul aria-labelledby="titulo-pilha">
+            <li>Node.js</li><li>Express</li><li>SQLite</li><li>JavaScript</li><li>Tailwind CSS</li><li>PWA</li><li>Login com Google</li><li>Render</li><li>Netlify</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -168,7 +175,7 @@
             <h3>Veja em 90 segundos</h3>
             <p id="pitch-desc">O pitch mostra o problema, a solução e o sistema funcionando de verdade. Tem narração e legendas.</p>
             <div class="acoes">
-              <a class="botao primario" id="linkPulso" href="#" target="_blank" rel="noopener" hidden>Abrir o site da Pulso</a>
+              <a class="botao primario" id="linkPulso" href="#" target="_blank" rel="noopener" hidden>Abrir o site da Pulso <span class="seta" aria-hidden="true">↗</span></a>
               <a class="botao secundario" href="#contato">Quero um projeto assim</a>
             </div>
           </div>
@@ -237,6 +244,8 @@
             <p>Elias Figueiredo de Sousa<small>Fundador e desenvolvedor</small></p>
           </div>
         </div>
+        <div class="sobre-lado">
+        <figure class="sobre-foto"><img src="assets/img/sobre-codigo-800.webp" srcset="assets/img/sobre-codigo-800.webp 800w, assets/img/sobre-codigo.webp 1600w" sizes="(min-width: 900px) 480px, 100vw" alt="" loading="lazy" width="1600" height="1067"></figure>
         <ul class="valores" aria-label="Nossos valores">
           <li><b>Energia</b><span>Força e ritmo para entregar o que foi combinado.</span></li>
           <li><b>Tecnologia</b><span>Design moderno, preciso e com identidade própria.</span></li>
@@ -244,6 +253,7 @@
           <li><b>Confiança</b><span>Profissionalismo e segurança em cada detalhe.</span></li>
           <li><b>Evolução</b><span>Crescemos junto com o negócio de quem nos contrata.</span></li>
         </ul>
+        </div>
       </div>
     </section>
 

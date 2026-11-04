@@ -88,3 +88,42 @@ const CONFIG = {
   }, { rootMargin: '-45% 0px -50% 0px' });
   document.querySelectorAll('main section[id]').forEach((s) => secaoAtual.observe(s));
 })();
+
+/* ---------- 7. Detalhes de produto: luz nos cartões e vitrine com profundidade ---------- */
+(function () {
+  if (!matchMedia('(hover: hover)').matches) return;
+
+  // Luz que segue o mouse dentro dos cartões.
+  document.querySelectorAll('.servico, .entrega, .ficha div, .pitch video, .dfd').forEach((el) => {
+    if (el.tagName === 'VIDEO') return;
+    el.classList.add('luz');
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Vitrine: inclina até 4 graus seguindo o mouse; o celular sobe um pouco ao rolar.
+  const abertura = document.querySelector('.abertura');
+  const vitrine = document.querySelector('.vitrine');
+  if (!abertura || !vitrine) return;
+  let quadro = 0;
+  abertura.addEventListener('pointermove', (e) => {
+    cancelAnimationFrame(quadro);
+    quadro = requestAnimationFrame(() => {
+      const r = vitrine.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+      const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+      vitrine.style.setProperty('--ry', `${(dx * 6).toFixed(2)}deg`);
+      vitrine.style.setProperty('--rx', `${(-dy * 4).toFixed(2)}deg`);
+    });
+  });
+  abertura.addEventListener('pointerleave', () => { vitrine.style.setProperty('--ry', '0deg'); vitrine.style.setProperty('--rx', '0deg'); });
+  window.addEventListener('scroll', () => {
+    const sobe = Math.min(60, window.scrollY * 0.08);
+    vitrine.style.setProperty('--sobe', `${-sobe}px`);
+  }, { passive: true });
+})();
